@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import storage from 'helpers/storage';
 import { nanoid } from 'nanoid';
 import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
