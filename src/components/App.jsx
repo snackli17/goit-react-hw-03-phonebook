@@ -1,8 +1,10 @@
 import { Component } from 'react';
+import storage from 'helpers/storage';
 import { nanoid } from 'nanoid';
 import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
+
 
 export class App extends Component {
   state = {
@@ -13,7 +15,26 @@ export class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
+    name: '',
+    number: '',
   };
+
+  
+  componentDidMount() {
+    const contactsFromLocalStorage = localStorage.getItem('contactList');
+    const parsedContacts = JSON.parse(contactsFromLocalStorage);
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const prevStateContacts = prevState.contacts;
+    const nextStayContacts = this.state.contacts;
+    if (prevStateContacts !== nextStayContacts) {
+      localStorage.setItem('contactList', JSON.stringify(nextStayContacts));
+    }
+  }
 
   inputChange = event => {
     const { name, value } = event.target;
