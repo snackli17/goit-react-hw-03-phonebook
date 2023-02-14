@@ -18,8 +18,8 @@ export class App extends Component {
     name: '',
     number: '',
   };
+  // contacts;
 
-  
   componentDidMount() {
     const contactsFromLocalStorage = localStorage.getItem('contactList');
     const parsedContacts = JSON.parse(contactsFromLocalStorage);
